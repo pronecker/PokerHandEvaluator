@@ -14,7 +14,7 @@ public final class PokerHandImpl implements PokerHand {
 
     public PokerHandImpl(@NotNull final Collection<? extends Card> cards) {
         this.cards = cards;
-        rank = evaluateRank();
+        rank = HandRankEvaluatorImpl.getInstance().evaluate(cards);
     }
 
     @Override
@@ -25,10 +25,6 @@ public final class PokerHandImpl implements PokerHand {
     @Override
     public @NotNull HandRank getRank() {
         return rank;
-    }
-
-    private HandRank evaluateRank() {
-        throw new IllegalStateException("not implemented!");
     }
 
 }
