@@ -20,7 +20,7 @@ public class TestUtility {
                                                            new CardImpl(CardSuit.S, CardValue.KING),
                                                            new CardImpl(CardSuit.C, CardValue.EIGHT));
     static final Collection<Card> PAIR_LOW = List.of(new CardImpl(CardSuit.S, CardValue.JACK),
-                                                     new CardImpl(CardSuit.D, CardValue.TEN),
+                                                     new CardImpl(CardSuit.D, CardValue.ACE),
                                                      new CardImpl(CardSuit.C, CardValue.FIVE),
                                                      new CardImpl(CardSuit.C, CardValue.TWO),
                                                      new CardImpl(CardSuit.H, CardValue.JACK));
@@ -32,7 +32,7 @@ public class TestUtility {
     static final Collection<Card> TWO_PAIR_LOW = List.of(new CardImpl(CardSuit.H, CardValue.QUEEN),
                                                          new CardImpl(CardSuit.S, CardValue.QUEEN),
                                                          new CardImpl(CardSuit.D, CardValue.NINE),
-                                                         new CardImpl(CardSuit.C, CardValue.TWO),
+                                                         new CardImpl(CardSuit.C, CardValue.KING),
                                                          new CardImpl(CardSuit.C, CardValue.NINE));
     static final Collection<Card> TWO_PAIR_HIGH = List.of(new CardImpl(CardSuit.H, CardValue.QUEEN),
                                                           new CardImpl(CardSuit.D, CardValue.TEN),
@@ -43,7 +43,7 @@ public class TestUtility {
                                                                 new CardImpl(CardSuit.S, CardValue.FOUR),
                                                                 new CardImpl(CardSuit.D, CardValue.FOUR),
                                                                 new CardImpl(CardSuit.C, CardValue.FIVE),
-                                                                new CardImpl(CardSuit.C, CardValue.TWO));
+                                                                new CardImpl(CardSuit.C, CardValue.ACE));
     static final Collection<Card> THREE_OF_A_KIND_HIGH = List.of(new CardImpl(CardSuit.H, CardValue.JACK),
                                                                  new CardImpl(CardSuit.S, CardValue.JACK),
                                                                  new CardImpl(CardSuit.D, CardValue.JACK),
@@ -80,15 +80,15 @@ public class TestUtility {
                                                             new CardImpl(CardSuit.C, CardValue.TEN),
                                                             new CardImpl(CardSuit.C, CardValue.TEN));
 
-    static final Collection<Card> FOUR_OF_A_KIND_LOW = List.of(new CardImpl(CardSuit.H, CardValue.JACK),
-                                                               new CardImpl(CardSuit.S, CardValue.JACK),
-                                                               new CardImpl(CardSuit.D, CardValue.JACK),
-                                                               new CardImpl(CardSuit.C, CardValue.JACK),
-                                                               new CardImpl(CardSuit.C, CardValue.TWO));
-    static final Collection<Card> FOUR_OF_A_KIND_HIGH = List.of(new CardImpl(CardSuit.H, CardValue.QUEEN),
-                                                                new CardImpl(CardSuit.S, CardValue.QUEEN),
-                                                                new CardImpl(CardSuit.D, CardValue.QUEEN),
-                                                                new CardImpl(CardSuit.C, CardValue.QUEEN),
+    static final Collection<Card> FOUR_OF_A_KIND_LOW = List.of(new CardImpl(CardSuit.H, CardValue.THREE),
+                                                               new CardImpl(CardSuit.S, CardValue.THREE),
+                                                               new CardImpl(CardSuit.D, CardValue.THREE),
+                                                               new CardImpl(CardSuit.C, CardValue.THREE),
+                                                               new CardImpl(CardSuit.C, CardValue.JACK));
+    static final Collection<Card> FOUR_OF_A_KIND_HIGH = List.of(new CardImpl(CardSuit.H, CardValue.SEVEN),
+                                                                new CardImpl(CardSuit.S, CardValue.SEVEN),
+                                                                new CardImpl(CardSuit.D, CardValue.SEVEN),
+                                                                new CardImpl(CardSuit.C, CardValue.SEVEN),
                                                                 new CardImpl(CardSuit.C, CardValue.TWO));
     static final Collection<Card> STRAIGHT_FLUSH_LOW = List.of(new CardImpl(CardSuit.S, CardValue.EIGHT),
                                                                new CardImpl(CardSuit.S, CardValue.TEN),
