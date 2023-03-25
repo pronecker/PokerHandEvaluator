@@ -29,9 +29,21 @@ class HandRankEvaluatorImplTest {
     }
 
     @Test
+    void samePair() {
+        assertEquals(HandRank.PAIR, testSubject.evaluate(TestUtility.SAME_PAIR_LOW));
+        assertEquals(HandRank.PAIR, testSubject.evaluate(TestUtility.SAME_PAIR_HIGH));
+    }
+
+    @Test
     void twoPair() {
         assertEquals(HandRank.TWO_PAIRS, testSubject.evaluate(TestUtility.TWO_PAIR_LOW));
         assertEquals(HandRank.TWO_PAIRS, testSubject.evaluate(TestUtility.TWO_PAIR_HIGH));
+    }
+
+    @Test
+    void sameTwoPair() {
+        assertEquals(HandRank.TWO_PAIRS, testSubject.evaluate(TestUtility.SAME_TWO_PAIR_LOW));
+        assertEquals(HandRank.TWO_PAIRS, testSubject.evaluate(TestUtility.SAME_TWO_PAIR_HIGH));
     }
 
     @Test

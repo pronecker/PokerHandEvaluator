@@ -39,6 +39,26 @@ public class TestUtility {
                                                           new CardImpl(CardSuit.S, CardValue.QUEEN),
                                                           new CardImpl(CardSuit.C, CardValue.TEN),
                                                           new CardImpl(CardSuit.C, CardValue.TWO));
+    static final Collection<Card> SAME_PAIR_LOW = List.of(new CardImpl(CardSuit.S, CardValue.JACK),
+                                                          new CardImpl(CardSuit.D, CardValue.KING),
+                                                          new CardImpl(CardSuit.C, CardValue.FIVE),
+                                                          new CardImpl(CardSuit.C, CardValue.TWO),
+                                                          new CardImpl(CardSuit.H, CardValue.JACK));
+    static final Collection<Card> SAME_PAIR_HIGH = List.of(new CardImpl(CardSuit.S, CardValue.JACK),
+                                                           new CardImpl(CardSuit.D, CardValue.ACE),
+                                                           new CardImpl(CardSuit.H, CardValue.JACK),
+                                                           new CardImpl(CardSuit.C, CardValue.FIVE),
+                                                           new CardImpl(CardSuit.C, CardValue.TWO));
+    static final Collection<Card> SAME_TWO_PAIR_LOW = List.of(new CardImpl(CardSuit.H, CardValue.QUEEN),
+                                                              new CardImpl(CardSuit.D, CardValue.NINE),
+                                                              new CardImpl(CardSuit.C, CardValue.THREE),
+                                                              new CardImpl(CardSuit.C, CardValue.NINE),
+                                                              new CardImpl(CardSuit.S, CardValue.QUEEN));
+    static final Collection<Card> SAME_TWO_PAIR_HIGH = List.of(new CardImpl(CardSuit.H, CardValue.QUEEN),
+                                                               new CardImpl(CardSuit.S, CardValue.QUEEN),
+                                                               new CardImpl(CardSuit.D, CardValue.NINE),
+                                                               new CardImpl(CardSuit.C, CardValue.KING),
+                                                               new CardImpl(CardSuit.C, CardValue.NINE));
     static final Collection<Card> THREE_OF_A_KIND_LOW = List.of(new CardImpl(CardSuit.H, CardValue.FOUR),
                                                                 new CardImpl(CardSuit.S, CardValue.FOUR),
                                                                 new CardImpl(CardSuit.D, CardValue.FOUR),

@@ -1,10 +1,12 @@
 package org.example.poker.domain.impl;
 
 import org.example.poker.domain.Card;
+import org.example.poker.domain.HandRank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PokerHandImplTest {
@@ -32,8 +34,18 @@ class PokerHandImplTest {
     }
 
     @Test
+    void samePair() {
+        compare(TestUtility.SAME_PAIR_LOW, TestUtility.SAME_PAIR_HIGH);
+    }
+
+    @Test
     void twoPair() {
         compare(TestUtility.TWO_PAIR_LOW, TestUtility.TWO_PAIR_HIGH);
+    }
+
+    @Test
+    void sameTwoPair() {
+        compare(TestUtility.SAME_TWO_PAIR_LOW, TestUtility.SAME_TWO_PAIR_HIGH);
     }
 
     @Test
