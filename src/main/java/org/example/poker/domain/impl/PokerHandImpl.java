@@ -34,8 +34,7 @@ public final class PokerHandImpl implements PokerHand {
 
         return switch (rank) {
             case HIGH_CARD, FLUSH, STRAIGHT, STRAIGHT_FLUSH -> compareHighCards(other.getCards());
-            case PAIR -> comparePair(other.getCards());
-            case TWO_PAIRS -> compareTwoPairs(other.getCards());
+            case PAIR, TWO_PAIRS -> comparePairs(other.getCards());
             case THREE_OF_A_KIND, FULL_HOUSE -> compareByCount(other.getCards(), 3);
             case FOUR_OF_A_KIND -> compareByCount(other.getCards(), 4);
         };
@@ -51,19 +50,9 @@ public final class PokerHandImpl implements PokerHand {
         return Collections.unmodifiableCollection(cards);
     }
 
-    private int comparePair(final Collection<? extends Card> otherCards) {
-        final CardValue myPairValue = getValueForCount(cards, 2);
-        final CardValue otherPairValue = getValueForCount(otherCards, 2);
-        final int compare = myPairValue.compareTo(otherPairValue);
-        if (compare != 0) {
-            return compare;
-        }
-        return compareHighCards(otherCards);
-    }
-
-    private int compareTwoPairs(final Collection<? extends Card> otherCards) {
-        final List<CardValue> myPairValues = getTwoPairs(cards);
-        final List<CardValue> otherPairValues = getTwoPairs(otherCards);
+    private int comparePairs(final Collection<? extends Card> otherCards) {
+        final List<CardValue> myPairValues = getPairValues(cards);
+        final List<CardValue> otherPairValues = getPairValues(otherCards);
 
         for (int i = 0; i < myPairValues.size(); i++) {
             final int compare = myPairValues.get(i).compareTo(otherPairValues.get(i));
@@ -75,22 +64,14 @@ public final class PokerHandImpl implements PokerHand {
         return compareHighCards(otherCards);
     }
 
-    private List<CardValue> getTwoPairs(final Collection<? extends Card> cards) {
-        final Map<CardValue, Integer> valueCounts = new HashMap<>();
-        for (final Card card : cards) {
-            valueCounts.put(card.getValue(),
-                            valueCounts.getOrDefault(card.getValue(), 0) + 1);
-        }
+    private List<CardValue> getPairValues(final Collection<? extends Card> cards) {
+        final Map<CardValue, Integer> valueCounts = ValueCounter.count(cards);
 
         final List<CardValue> pairs = new ArrayList<>();
         for (final Map.Entry<CardValue, Integer> entry : valueCounts.entrySet()) {
             if (entry.getValue() == 2) {
                 pairs.add(entry.getKey());
             }
-        }
-
-        if (pairs.size() != 2) {
-            throw new IllegalStateException("no two pairs found in " + cards);
         }
 
         return pairs.stream()
@@ -105,11 +86,7 @@ public final class PokerHandImpl implements PokerHand {
     }
 
     private CardValue getValueForCount(final Collection<? extends Card> cards, final int count) {
-        final Map<CardValue, Integer> valueCounts = new HashMap<>();
-        for (final Card card : cards) {
-            valueCounts.put(card.getValue(),
-                            valueCounts.getOrDefault(card.getValue(), 0) + 1);
-        }
+        final Map<CardValue, Integer> valueCounts = ValueCounter.count(cards);
 
         for (final Map.Entry<CardValue, Integer> entry : valueCounts.entrySet()) {
             if (entry.getValue() == count) {
@@ -117,7 +94,7 @@ public final class PokerHandImpl implements PokerHand {
             }
         }
 
-        throw new IllegalStateException("no four of a kind found in " + cards);
+        throw new IllegalStateException("no " + count + " of a kind found in " + cards);
     }
 
     private int compareHighCards(final Collection<? extends Card> otherCards) {

@@ -24,7 +24,7 @@ public final class HandRankEvaluatorImpl implements HandRankEvaluator {
 
         final boolean isFlush = isFlush(cards);
         final boolean isStraight = isStraight(orderedCards);
-        final Map<CardValue, Integer> valueCounts = getValueCounts(cards);
+        final Map<CardValue, Integer> valueCounts = ValueCounter.count(cards);
 
         if (isFlush && isStraight) {
             return HandRank.STRAIGHT_FLUSH;
@@ -59,15 +59,6 @@ public final class HandRankEvaluatorImpl implements HandRankEvaluator {
         }
 
         return HandRank.HIGH_CARD;
-    }
-
-    private Map<CardValue, Integer> getValueCounts(final Collection<? extends Card> cards) {
-        final Map<CardValue, Integer> valueCounts = new HashMap<>();
-        for (final Card card : cards) {
-            valueCounts.put(card.getValue(),
-                            valueCounts.getOrDefault(card.getValue(), 0) + 1);
-        }
-        return valueCounts;
     }
 
     private boolean hasCount(final Map<CardValue, Integer> valueCounts, final int count) {
