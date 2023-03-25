@@ -25,4 +25,22 @@ public final class CardImpl implements Card {
     public @NotNull CardValue getValue() {
         return value;
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final CardImpl card = (CardImpl) o;
+
+        if (suit != card.suit) return false;
+        return value == card.value;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = suit.hashCode();
+        result = 31 * result + value.hashCode();
+        return result;
+    }
 }

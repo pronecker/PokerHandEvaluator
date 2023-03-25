@@ -21,8 +21,16 @@ public final class PokerHandImpl implements PokerHand {
     @TestOnly
     PokerHandImpl(final Collection<? extends Card> cards,
                   final HandRank rank) {
+        checkUniqueness(cards);
         this.cards = cards;
         this.rank = rank;
+    }
+
+    private void checkUniqueness(final Collection<? extends Card> cards) {
+        final Set<Card> cardSet = new HashSet<>(cards);
+        if (cardSet.size() != cards.size()) {
+            throw new IllegalArgumentException("cards must be unique");
+        }
     }
 
     @Override
@@ -30,7 +38,6 @@ public final class PokerHandImpl implements PokerHand {
         if (!rank.equals(other.getRank())) {
             return rank.compareTo(other.getRank());
         }
-
 
         return switch (rank) {
             case HIGH_CARD, FLUSH, STRAIGHT, STRAIGHT_FLUSH -> compareHighCards(other.getCards());
