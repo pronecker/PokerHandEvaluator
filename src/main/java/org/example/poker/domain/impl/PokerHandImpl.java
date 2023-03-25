@@ -31,31 +31,14 @@ public final class PokerHandImpl implements PokerHand {
             return rank.compareTo(other.getRank());
         }
 
-        if (rank.equals(HandRank.HIGH_CARD)
-            || rank.equals(HandRank.FLUSH)
-            || rank.equals(HandRank.STRAIGHT)
-            || rank.equals(HandRank.STRAIGHT_FLUSH)) {
-            return compareHighCards(other.getCards());
-        }
 
-        if (rank.equals(HandRank.PAIR)) {
-            return comparePair(other.getCards());
-        }
-
-        if (rank.equals(HandRank.TWO_PAIRS)) {
-            return compareTwoPairs(other.getCards());
-        }
-
-        if (rank.equals(HandRank.THREE_OF_A_KIND)
-            || rank.equals(HandRank.FULL_HOUSE)) {
-            return compareThreeOfAKind(other.getCards());
-        }
-
-        if (rank.equals(HandRank.FOUR_OF_A_KIND)) {
-            return compareFourOfAKind(other.getCards());
-        }
-
-        throw new IllegalStateException("rank comparison not implemented for " + rank);
+        return switch (rank) {
+            case HIGH_CARD, FLUSH, STRAIGHT, STRAIGHT_FLUSH -> compareHighCards(other.getCards());
+            case PAIR -> comparePair(other.getCards());
+            case TWO_PAIRS -> compareTwoPairs(other.getCards());
+            case THREE_OF_A_KIND, FULL_HOUSE -> compareByCount(other.getCards(), 3);
+            case FOUR_OF_A_KIND -> compareByCount(other.getCards(), 4);
+        };
     }
 
     @Override
@@ -115,15 +98,9 @@ public final class PokerHandImpl implements PokerHand {
                     .toList();
     }
 
-    private int compareThreeOfAKind(final Collection<? extends Card> otherCards) {
-        final CardValue myValue = getValueForCount(cards, 3);
-        final CardValue otherValue = getValueForCount(otherCards, 3);
-        return myValue.compareTo(otherValue);
-    }
-
-    private int compareFourOfAKind(final Collection<? extends Card> otherCards) {
-        final CardValue myValue = getValueForCount(cards, 4);
-        final CardValue otherValue = getValueForCount(otherCards, 4);
+    private int compareByCount(final Collection<? extends Card> otherCards, final int count) {
+        final CardValue myValue = getValueForCount(cards, count);
+        final CardValue otherValue = getValueForCount(otherCards, count);
         return myValue.compareTo(otherValue);
     }
 
